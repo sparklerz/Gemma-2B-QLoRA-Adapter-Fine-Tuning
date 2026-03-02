@@ -13,6 +13,8 @@ This repo is notebook-first (Colab friendly) and produces a lightweight **PEFT a
 - **Published adapter:** https://huggingface.co/ash001/gemma-2b-dolly-qlora-adapter
 - **Training notebook (Colab):** https://colab.research.google.com/drive/1xKDREzjPWhXVwCSDQueVqQDpAf3PeSEB
 - **Base vs tuned comparison notebook (Colab):** https://colab.research.google.com/drive/116A84xPf2crkR4MJ0hZZtsag4U24kbsP
+- **Comparison outputs (Markdown):** [`outputs_compare/outputs_comparison.md`](https://github.com/sparklerz/Gemma-2B-QLoRA-Adapter-Fine-Tuning/blob/main/outputs_compare/outputs_comparison.md)
+- **Comparison outputs (JSON):** [`outputs_compare/outputs_comparison.json`](https://github.com/sparklerz/Gemma-2B-QLoRA-Adapter-Fine-Tuning/blob/main/outputs_compare/outputs_comparison.json)
 
 ---
 
@@ -78,6 +80,25 @@ This notebook:
 - Loads `google/gemma-2b` (base) and `ash001/gemma-2b-dolly-qlora-adapter` (adapter)
 - Runs a prompt suite and saves:
   - `outputs_compare/outputs_comparison.json`
+  - `outputs_compare/outputs_comparison.md` (human-readable report)
+
+---
+ 
+## Results snapshot (base vs adapter)
+
+The full evaluation artifacts are in:
+- [`outputs_compare/outputs_comparison.md`](https://github.com/sparklerz/Gemma-2B-QLoRA-Adapter-Fine-Tuning/blob/main/outputs_compare/outputs_comparison.md)
+- [`outputs_compare/outputs_comparison.json`](https://github.com/sparklerz/Gemma-2B-QLoRA-Adapter-Fine-Tuning/blob/main/outputs_compare/outputs_comparison.json)
+
+**Generation settings (comparison run):** `max_new_tokens=128`, `temperature=0.7`, `top_p=0.9`
+
+### Highlights
+- **Cleaner instruction-following for short “assistant-y” tasks** (e.g., friendly rewrites and list extraction).
+  - Example: the base model “prompt leaks” and derails on the friendly rewrite task, while the adapter gives a direct rewrite.  
+- **Action-item extraction improves**: base asks for clarification repeatedly, adapter outputs a clean bullet list.
+
+### Known limitations (from the same prompt suite)
+- The adapter can **regress on coding-style prompts** (example in the report: “remove duplicates while preserving order”).
 
 ---
 
